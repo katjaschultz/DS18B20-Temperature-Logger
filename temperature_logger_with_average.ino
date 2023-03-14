@@ -53,7 +53,7 @@ void loop() {
   float tempSpot = 0; // initialize spot temperature to 0
   int numReadings = 10; // number of readings to take for averaging
   
-  // start 0th sequence to read out the rom code 
+  // start sequence to read out the rom code 
   ow.reset();
   ow.write(READ_ROM);
   for (int i=0; i<8; i++){
@@ -68,15 +68,16 @@ void loop() {
   }
 
 // take multiple readings and calculate average
+ 
   for (int i=0; i<numReadings; i++) {
-    // start sequence for converting temperature
+    // first sequence for converting temperature
     ow.reset();
     ow.write(SKIP_ROM);
     ow.write(CONVERT_T);
     
     delay(750); // wait for conversion to complete (750ms for 12-bit resolution)
 
-    // start sequence for reading data from scratchpad
+    // second sequence for reading data from scratchpad
     ow.reset();
     ow.write(SKIP_ROM);
     ow.write(READ_SCRATCHPAD);
